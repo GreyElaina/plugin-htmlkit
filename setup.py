@@ -1,3 +1,4 @@
+import os
 import json
 from pathlib import Path
 from shutil import copyfile
@@ -65,9 +66,10 @@ class XmakeBuildExt(build_ext):
         core_dylib = bindist_dir / "core.dylib"
         if not bindist_dir.exists():
             ensure_submodules(self)
-            check_call(["xmake", "f", "-m", "release", "-y"])
-            check_call(["xmake", "build", "core"])
-            check_call(["xmake", "install", "-o", "bindist"])
+            os.environ["XMAKE_ROOT"] = "y"
+            check_call(["xmake", "f", "-m", "release", "-y"], shell=True)
+            check_call(["xmake", "build", "core"], shell=True)
+            check_call(["xmake", "install", "-o", "bindist"], shell=True)
         dylib_target = build_target.joinpath("core.so").with_suffix(get_abi3_suffix())
         copyfile(core_dylib, dylib_target)
 

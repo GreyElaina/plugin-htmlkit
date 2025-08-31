@@ -73,6 +73,5 @@ build = "cp39-*"
 archs = ["x86_64", "i686", "aarch64"]
 [tool.cibuildwheel.macos]
 archs = ["universal2"]
-before-build = "brew install libffi zlib"
 [tool.cibuildwheel.windows]
 archs = ["AMD64", "x86"]
