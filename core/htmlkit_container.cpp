@@ -18,7 +18,6 @@ License along with this library; if not, see <https://www.gnu.org/licenses/>.
 #include "htmlkit_container.h"
 #include "cairo_wrapper.h"
 #include <array>
-#include <uriparser/Uri.h>
 #include <pango/pango.h>
 #include <pango/pango-font.h>
 #include <pango/pangocairo.h>

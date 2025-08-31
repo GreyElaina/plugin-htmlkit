@@ -33,9 +33,8 @@ def ensure_submodules(cmd):
     for path, url, commit in get_submodules():
         subdir = Path(path)
         if not subdir.exists():
-            cmd.announce(f"Cloning {url} into {path} @ {commit}", level=3)
+            cmd.announce(f"Cloning {url} into {path} @ {commit}", level=20)
             check_call(["git", "clone", url, path])
-        check_call(["git", "-C", path, "fetch", "--depth=1", "origin", commit])
         check_call(["git", "-C", path, "checkout", commit])
 
 
