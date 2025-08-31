@@ -1,7 +1,7 @@
 from nonebot import on_command, require
-from nonebot.params import CommandArg
 from nonebot.adapters.onebot.v11 import Message
 from nonebot.adapters.onebot.v11.message import MessageSegment
+from nonebot.params import CommandArg
 
 require("nonebot_plugin_htmlkit")
 from nonebot_plugin_htmlkit import html_to_pic

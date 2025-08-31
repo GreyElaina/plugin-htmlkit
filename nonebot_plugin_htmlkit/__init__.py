@@ -1,11 +1,13 @@
-import nonebot
 from asyncio import get_running_loop, run_coroutine_threadsafe
+from collections.abc import Coroutine
+from typing import Any, Callable, Optional
+from urllib.parse import urljoin
+
+import nonebot
 from nonebot.plugin import PluginMetadata, get_plugin_config
 
-from urllib.parse import urljoin
-from typing import Any, Callable, Coroutine, Optional
+from . import config, core
 from .config import FcConfig
-from . import core
 
 __plugin_meta__ = PluginMetadata(
     name="nonebot-plugin-htmlkit",
@@ -59,7 +61,9 @@ async def html_to_pic(
         font_name,
         lang,
         culture,
-        lambda exc, exc_type, tb: nonebot.logger.opt(exception=(exc_type, exc, tb)).error("Exception in html_to_pic: "),
+        lambda exc, exc_type, tb: nonebot.logger.opt(
+            exception=(exc_type, exc, tb)
+        ).error("Exception in html_to_pic: "),
         run_coroutine_threadsafe,
         urljoin,
         loop,

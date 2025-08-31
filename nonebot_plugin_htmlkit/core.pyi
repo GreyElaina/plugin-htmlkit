@@ -1,26 +1,20 @@
-"""
-Type hints for core module of htmlkit.
-"""
-
-from typing import Callable, Any, Coroutine, Optional
+import asyncio
+from collections.abc import Coroutine
 import concurrent.futures
 from types import TracebackType
-import asyncio
+from typing import Any, Callable
+from typing_extensions import TypeAlias, Unpack
 
-def _init_fontconfig_internal() -> None:
-    """
-    Pre-initialize fontconfig with environment variables.
+def _init_fontconfig_internal() -> None: ...
 
-    Raises:
-        RuntimeError: If fontconfig initialization fails.
-    """
-
-_ExceptionHandleFn = Callable[[BaseException, type[BaseException], TracebackType], None]
-_AsyncioRunCoroutineThreadsafeFn = Callable[
-    [Coroutine[Any, Any, Any], asyncio.AbstractEventLoop], concurrent.futures.Future[Any]
+_ExceptionTuple: TypeAlias = tuple[BaseException, type[BaseException], TracebackType]
+_ExceptionHandleFn: TypeAlias = Callable[[Unpack[_ExceptionTuple]], None]
+_AsyncioRunCoroutineThreadsafeFn: TypeAlias = Callable[
+    [Coroutine[Any, Any, Any], asyncio.AbstractEventLoop],
+    concurrent.futures.Future[Any],
 ]
-_UrlJoinFn = Callable[[str, str], str]
-_FetchFn = Callable[[str], Coroutine[Any, Any, Optional[bytes]]]
+_UrlJoinFn: TypeAlias = Callable[[str, str], str]
+_FetchFn: TypeAlias = Callable[[str], Coroutine[Any, Any, None | bytes]]
 
 def _render_internal(
     html_content: str,
