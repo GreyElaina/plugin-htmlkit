@@ -68,11 +68,14 @@ keep-runtime-typing = true
 [tool.cibuildwheel]
 build-frontend ="build[uv]"
 build = "cp39-*"
-xbuild-tools = ["xmake", "ninja", "meson", "cmake"]
+
 
 [tool.cibuildwheel.linux]
 archs = ["x86_64", "i686", "aarch64"]
+before-build = "curl -fsSL https://xmake.io/shget.text | bash"
 [tool.cibuildwheel.macos]
 archs = ["universal2"]
+before-build = "brew install xmake"
 [tool.cibuildwheel.windows]
-archs = ["AMD64", "x86", "ARM64"]
+archs = ["AMD64", "x86"]
+before-build = "winget install xmake"
