@@ -66,7 +66,7 @@ class XmakeBuildExt(build_ext):
         core_dylib = bindist_dir / "core.dylib"
         if not bindist_dir.exists():
             ensure_submodules(self)
-            check_call(["xmake", "f", "-m", "releasedbg", "-y"])
+            check_call(["xmake", "f", "-m", "release", "-y"])
             check_call(["xmake", "build", "core"])
             check_call(["xmake", "install", "-o", "bindist"])
         dylib_target = build_target.joinpath("core.so").with_suffix(get_abi3_suffix())
