@@ -70,8 +70,8 @@ build-frontend ="build[uv]"
 build = "cp39-*"
 
 [tool.cibuildwheel.linux]
-archs = ["x86_64", "i686", "aarch64"]
+archs = ["x86_64"]
 [tool.cibuildwheel.macos]
 archs = ["universal2"]
 [tool.cibuildwheel.windows]
-archs = ["AMD64", "x86"]
+archs = ["AMD64"]
