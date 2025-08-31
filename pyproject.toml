@@ -9,7 +9,7 @@ dependencies = [
 ]
 
 [build-system]
-requires = ["setuptools>=42", "wheel", "xmake-wheel"]
+requires = ["setuptools>=42", "pip", "wheel", "xmake-wheel"]
 build-backend = "setuptools.build_meta"
 
 [dependency-groups]
