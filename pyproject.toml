@@ -72,13 +72,9 @@ xbuild-tools = ["xmake", "meson", "ninja", "cmake"]
 
 [tool.cibuildwheel.linux]
 archs = ["x86_64", "i686", "aarch64"]
-before-build = "curl -fsSL https://xmake.io/shget.text | bash"
+before-build = "which xmake"
 [tool.cibuildwheel.macos]
 archs = ["universal2"]
-before-build = [
-  "xcode-select --install || true",
-  "brew install xmake"
-]
+before-build = "brew install libffi zlib -y"
 [tool.cibuildwheel.windows]
-archs = ["AMD64", "x86"]
-before-build = "scoop install xmake"
+archs = ["AMD64", "i686"]
