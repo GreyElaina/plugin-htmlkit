@@ -23,6 +23,10 @@ jobs:
         uses: xmake-io/github-action-setup-xmake@v1
         with:
           xmake-version: latest
+          actions-cache-folder: '.xmake-cache'
+          actions-cache-key: ${{ runner.os }}-xmake-${{ hashFiles('**/xmake.lua') }}
+          package-cache: true
+          package-cache-key: ${{ runner.os }}-xmake-pkg-${{ hashFiles('**/xmake.lua', 'litehtml/**') }}
       
       - name: Set up QEMU
         if: runner.os == 'Linux'

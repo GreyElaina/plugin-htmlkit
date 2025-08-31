@@ -68,22 +68,11 @@ keep-runtime-typing = true
 [tool.cibuildwheel]
 build-frontend ="build[uv]"
 build = "cp39-*"
+xbuild-tools = ["xmake", "ninja", "meson", "cmake"]
 
 [tool.cibuildwheel.linux]
 archs = ["x86_64", "i686", "aarch64"]
-repair-wheel-command = [
-  "auditwheel repair -w {dest_dir} {wheel}",
-  "pipx run abi3audit --strict --report {wheel}",
-]
 [tool.cibuildwheel.macos]
 archs = ["universal2"]
-repair-wheel-command = [
-  "delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}",
-  "pipx run abi3audit --strict --report {wheel}",
-]
 [tool.cibuildwheel.windows]
 archs = ["AMD64", "x86", "ARM64"]
-repair-wheel-command = [
-  "pipx run delvewheel repair {wheel} -w {dest_dir}",
-  "pipx run abi3audit --strict --report {wheel}",
-]
