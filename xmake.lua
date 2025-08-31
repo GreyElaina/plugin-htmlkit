@@ -51,7 +51,7 @@ package("litehtml_local")
     end)
 package_end()
 
-add_requires("litehtml_local", "pango")
+add_requires("litehtml_local", "pango", "cairo")
 set_languages("c++17")
 add_requires("python", { system = true, version = "3.9.x" })
 add_requireconfs("**.python", { override = true, version = "3.9.x", headeronly = true })
