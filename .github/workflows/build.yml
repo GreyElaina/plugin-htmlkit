@@ -18,6 +18,9 @@ jobs:
 
       - name: Install UV
         uses: astral-sh/setup-uv@v6
+      
+      - name: Pin Python Version
+        run: uv python pin 3.9.13
 
       - name: Set up QEMU
         if: runner.os == 'Linux'
@@ -27,8 +30,6 @@ jobs:
 
       - name: Build wheels
         uses: pypa/cibuildwheel@v3.1.4
-        env:
-          CIBW_PROJECT_REQUIRES_PYTHON: "==3.9.13"
 
       - name: Upload wheels
         uses: actions/upload-artifact@v4
