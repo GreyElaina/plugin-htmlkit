@@ -9,7 +9,7 @@ dependencies = [
 ]
 
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=42", "wheel", "xmake-wheel"]
 build-backend = "setuptools.build_meta"
 
 [dependency-groups]
@@ -68,13 +68,11 @@ keep-runtime-typing = true
 [tool.cibuildwheel]
 build-frontend ="build[uv]"
 build = "cp39-*"
-xbuild-tools = ["xmake", "meson", "ninja", "cmake"]
 
 [tool.cibuildwheel.linux]
 archs = ["x86_64", "i686", "aarch64"]
-before-build = "which xmake"
 [tool.cibuildwheel.macos]
 archs = ["universal2"]
-before-build = "brew install libffi zlib -y"
+before-build = "brew install libffi zlib"
 [tool.cibuildwheel.windows]
-archs = ["AMD64", "i686"]
+archs = ["AMD64", "x86"]
