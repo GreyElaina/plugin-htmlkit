@@ -72,7 +72,7 @@ class XmakeBuildExt(build_ext):
             else:
                 kwargs = {}
             check_call(["xmake", "f", "-m", "release", "-y"], **kwargs)
-            check_call(["xmake", "build", "core", "-y"], **kwargs)
+            check_call(["xmake", "build", "core"], **kwargs)
             check_call(["xmake", "install", "-o", "bindist"], **kwargs)
         dylib_target = build_target.joinpath("core.so").with_suffix(get_abi3_suffix())
         copyfile(core_dylib, dylib_target)
