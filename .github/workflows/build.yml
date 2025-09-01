@@ -70,4 +70,70 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: wheels-linux
-          path: dist/*.whl
+          path: wheelhouse/*.whl
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          submodules: recursive
+      - name: Install UV
+        uses: astral-sh/setup-uv@v6
+      - name: Install XMake
+        uses: xmake-io/github-action-setup-xmake@v1
+        with:
+          xmake-version: latest
+          actions-cache-folder: '.xmake-cache'
+          actions-cache-key: xmake-windows-${{ hashFiles('xmake.lua') }}
+      - name: Pin Python Version
+        run: uv python pin 3.10.11
+      - name: Build wheels
+        run: |
+          git config --global --add safe.directory '*'
+          uv venv
+          .venv/bin/activate
+          uv pip install pip setuptools wheel ninja meson
+          uv build
+          cp dist/*.whl wheelhouse/
+        env:
+          XMAKE_ROOT: 'y'
+      - name: Upload wheels
+        uses: actions/upload-artifact@v4
+        with:
+          name: wheels-windows
+          path: wheelhouse/*.whl
+  
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          submodules: recursive
+      - name: Install UV
+        uses: astral-sh/setup-uv@v6
+      - name: Install XMake
+        uses: xmake-io/github-action-setup-xmake@v1
+        with:
+          xmake-version: latest
+          actions-cache-folder: '.xmake-cache'
+          actions-cache-key: xmake-macos-${{ hashFiles('xmake.lua') }}
+      - name: Pin Python Version
+        run: uv python pin 3.10.11
+      - name: Build wheels
+        run: |
+          git config --global --add safe.directory '*'
+          uv venv
+          source .venv/bin/activate
+          uv pip install pip setuptools wheel ninja meson delocate
+          uv build
+          delocate-wheel -w wheelhouse dist/*.whl
+        env:
+          XMAKE_ROOT: 'y'
+      - name: Upload wheels
+        uses: actions/upload-artifact@v4
+        with:
+          name: wheels-macos
+          path: wheelhouse/*.whl

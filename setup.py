@@ -67,14 +67,9 @@ class XmakeBuildExt(build_ext):
         if not bindist_dir.exists():
             ensure_submodules(self)
             os.environ["XMAKE_ROOT"] = "y"
-            if os.name == "nt":
-                check_call(["xmake", "config", "-vD", "-m", "release", "-y"], shell=True)
-                check_call(["xmake", "build", "core"], shell=True)
-                check_call(["xmake", "install", "-o", "bindist"], shell=True)
-            else:
-                check_call(["xmake", "config", "-m", "release", "-y"])
-                check_call(["xmake", "build", "core"])
-                check_call(["xmake", "install", "-o", "bindist"])
+            check_call(["xmake", "config", "-m", "release", "-y"])
+            check_call(["xmake", "build", "core"])
+            check_call(["xmake", "install", "-o", "bindist"])
         dylib_target = build_target.joinpath("core.so").with_suffix(get_abi3_suffix())
         copyfile(core_dylib, dylib_target)
 
