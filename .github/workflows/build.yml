@@ -3,39 +3,6 @@ on:
   push:
 
 jobs:
-  build:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
-        with:
-          submodules: recursive
-
-      - name: Install UV
-        uses: astral-sh/setup-uv@v6
-      - name: Install XMake
-        uses: xmake-io/github-action-setup-xmake@v1
-        with:
-          xmake-version: latest
-          actions-cache-folder: '.xmake-cache'
-          actions-cache-key: xmake-${{ matrix.os }}-${{ hashFiles('xmake.lua') }}
-      - name: Pin Python Version
-        run: uv python pin 3.10.11
-
-      - name: Build wheels
-        uses: pypa/cibuildwheel@v3.1.4
-
-      - name: Upload wheels
-        uses: actions/upload-artifact@v4
-        with:
-          name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
-          path: wheelhouse/*.whl
-
   build-linux:
     runs-on: ubuntu-latest
     container:
@@ -95,9 +62,9 @@ jobs:
           uv venv
           .venv/Scripts/activate
           cp .venv/Scripts/python.exe .venv/Scripts/python3.exe
-          uv pip install pip setuptools wheel ninja meson
+          uv pip install pip setuptools wheel ninja meson delvewheel
           uv build
-          cp dist/*.whl wheelhouse/
+          delvewheel repair dist/*.whl -w wheelhouse
         env:
           XMAKE_ROOT: 'y'
       - name: Upload wheels
