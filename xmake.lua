@@ -53,13 +53,16 @@ package_end()
 
 add_requires("litehtml_local", "pango", "cairo")
 set_languages("c++17")
-add_requires("python", { system = true, version = "3.10.x" })
+add_requires("python", { version = "3.10.x" })
 add_requireconfs("**.python", { override = true, version = "3.10.x", headeronly = true })
 
 function require_htmlkit()
     add_packages("litehtml_local", "cairo", "pango", "python")
     add_files("core/*.cpp")
     add_defines("UNICODE", "PY_SSIZE_T_CLEAN", "Py_LIMITED_API=0x030a0000")  -- Python 3.10
+    -- pangocairo 提供 _pango_cairo_* 相关符号，brew 的 pango 会安装 libpangocairo-1.0.dylib，
+    -- 但 xmake 的 pango 包默认未自动加入该子库链接，这里手动添加避免链接阶段 undefined symbols。
+    add_links("pangocairo-1.0")
     if is_plat("windows") then
         add_links("Dwrite")
     end
