@@ -58,7 +58,7 @@ jobs:
       - name: Build wheels
         run: |
           git config --global --add safe.directory '*'
-          xrepo install pango -y
+          xrepo install -y pango
           uv build -v
         env:
           XMAKE_ROOT: 'y'
