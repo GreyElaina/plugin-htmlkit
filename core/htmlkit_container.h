@@ -22,7 +22,7 @@ License along with this library; if not, see <https://www.gnu.org/licenses/>.
 #include <set>
 #include <map>
 #include <utility>
-#include <cairo/cairo.h>
+#include <cairo.h>
 #include <Python.h>
 
 #include "cairo_wrapper.h"
