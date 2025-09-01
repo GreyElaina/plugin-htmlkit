@@ -68,7 +68,7 @@ class XmakeBuildExt(build_ext):
             ensure_submodules(self)
             os.environ["XMAKE_ROOT"] = "y"
             if os.name == "nt":
-                check_call(["xmake", "config", "-m", "release", "-y"], shell=True)
+                check_call(["xmake", "config", "-vD", "-m", "release", "-y"], shell=True)
                 check_call(["xmake", "build", "core"], shell=True)
                 check_call(["xmake", "install", "-o", "bindist"], shell=True)
             else:

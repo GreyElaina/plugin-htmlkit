@@ -7,7 +7,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -63,6 +63,7 @@ jobs:
           uv pip install pip setuptools wheel ninja meson auditwheel
           dnf install -y pango-devel cairo-devel fontconfig-devel
           uv build
+          auditwheel repair dist/*.whl -w wheelhouse
         env:
           XMAKE_ROOT: 'y'
       - name: Upload wheels
