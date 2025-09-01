@@ -64,6 +64,10 @@ function require_htmlkit()
     if is_plat("windows") then
         add_links("Dwrite")
     end
+    if is_plat("macosx") then
+        -- Pango CoreText backend needs CoreText (and CoreGraphics/CoreFoundation for related symbols)
+        add_frameworks("CoreText", "CoreGraphics", "CoreFoundation")
+    end
 end
 
 target("core")
