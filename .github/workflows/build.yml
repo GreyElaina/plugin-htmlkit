@@ -58,6 +58,8 @@ jobs:
       - name: Build wheels
         run: |
           git config --global --add safe.directory '*'
+          uv venv
+          source .venv/bin/activate
           xrepo install -y pango
           uv build -v
         env:
