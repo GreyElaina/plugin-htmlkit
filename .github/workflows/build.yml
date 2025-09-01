@@ -45,7 +45,6 @@ jobs:
       - name: Enable GCC 14 toolset
         run: |
           dnf -y install gcc-toolset-14 gcc-toolset-14-gcc-c++
-          echo "source /opt/rh/gcc-toolset-14/enable" >> $GITHUB_ENV
 
       - name: Checkout code
         uses: actions/checkout@v5
@@ -57,7 +56,8 @@ jobs:
       - name: Pin Python Version
         run: uv python pin 3.9.13
       - name: Build wheels
-        run:
+        run: |
+          source /opt/rh/gcc-toolset-14/enable
           uv build -v
       - name: Upload wheels
         uses: actions/upload-artifact@v4
