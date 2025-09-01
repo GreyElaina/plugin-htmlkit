@@ -53,7 +53,8 @@ package_end()
 
 add_requires("litehtml_local", "pango", "cairo")
 set_languages("c++17")
-add_requires("python", { version = "3.10.x" })
+
+add_requires("python", { version = "3.10.x", configs = {shared = true} })
 add_requireconfs("**.python", { override = true, version = "3.10.x", headeronly = true })
 
 function require_htmlkit()
