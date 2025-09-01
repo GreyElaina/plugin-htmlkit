@@ -59,7 +59,7 @@ jobs:
         run: |
           git config --global --add safe.directory '*'
           uv venv
-          uv sync
+          uv sync --no-build
           source .venv/bin/activate
           xmake config -m release -y
           uv build -v
