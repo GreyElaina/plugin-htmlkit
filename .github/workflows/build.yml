@@ -44,9 +44,7 @@ jobs:
 
       - name: Enable GCC 14 toolset
         run: |
-          dnf -y install gcc-toolset-14 gcc-toolset-14-gcc-c++ \
-                         gcc-toolset-14-aarch64-linux-gnu-gcc \
-                         gcc-toolset-14-aarch64-linux-gnu-gcc-c++
+          dnf -y install gcc-toolset-14 gcc-toolset-14-gcc-c++
           echo "source /opt/rh/gcc-toolset-14/enable" >> $GITHUB_ENV
 
       - name: Checkout code
