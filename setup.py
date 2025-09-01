@@ -1,6 +1,5 @@
-import os
-import sys
 import json
+import os
 from pathlib import Path
 from shutil import copyfile
 from subprocess import check_call, check_output
@@ -68,9 +67,8 @@ class XmakeBuildExt(build_ext):
         if not bindist_dir.exists():
             ensure_submodules(self)
             os.environ["XMAKE_ROOT"] = "y"
-            print(sys.version)
             if os.name == "nt":
-                check_call(["xmake", "config", "-y"], shell=True)
+                check_call(["xmake", "config", "-m", "release", "-y"], shell=True)
                 check_call(["xmake", "build", "core"], shell=True)
                 check_call(["xmake", "install", "-o", "bindist"], shell=True)
             else:

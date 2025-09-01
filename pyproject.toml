@@ -3,7 +3,7 @@ name = "nonebot-plugin-htmlkit"
 version = "0.1.0"
 description = "Lightweight HTML rendering plugin for NoneBot"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
     "nonebot2~=2.3",
 ]
@@ -20,10 +20,12 @@ dev = [
     "setuptools>=80.9.0",
 ]
 
+[tool.pyright]
+pythonVersion = "3.10"
 
 [tool.ruff]
 line-length = 88
-target-version = "py39"
+target-version = "py310"
 
 [tool.ruff.format]
 line-ending = "lf"
@@ -67,7 +69,7 @@ keep-runtime-typing = true
 
 [tool.cibuildwheel]
 build-frontend ="build[uv]"
-build = "cp39-*"
+build = "cp310-*"
 
 [tool.cibuildwheel.linux]
 archs = ["x86_64"]
