@@ -60,6 +60,8 @@ jobs:
           git config --global --add safe.directory '*'
           xmake config -m release -y
           uv build -v
+        env:
+          XMAKE_ROOT: 'y'
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
