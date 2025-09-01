@@ -68,7 +68,7 @@ class XmakeBuildExt(build_ext):
             ensure_submodules(self)
             os.environ["XMAKE_ROOT"] = "y"
             check_call(["xmake", "config", "-m", "release", "-y"])
-            check_call(["xmake", "build", "core"])
+            check_call(["xmake", "build", "-vD", "core"])
             check_call(["xmake", "install", "-o", "bindist"])
         dylib_target = build_target.joinpath("core.so").with_suffix(get_abi3_suffix())
         copyfile(core_dylib, dylib_target)
