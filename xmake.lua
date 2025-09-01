@@ -54,7 +54,8 @@ package_end()
 add_requires("litehtml_local", "pango", "cairo")
 set_languages("c++17")
 
-add_requires("python", { version = "3.10.x", configs = {shared = true, headeronly = true} })
+add_requires("python", { system = true, version = "3.10.x", configs = {shared = true, headeronly = true} })
+add_requireconfs("**.python", { override = true, version = "3.10.x", headeronly = true, shared = true })
 
 function require_htmlkit()
     add_packages("litehtml_local", "cairo", "pango", "python")
@@ -81,5 +82,3 @@ target("core")
         add_ldflags("-undefined", "dynamic_lookup", {force = true})
         add_shflags("-undefined", "dynamic_lookup", {force = true})
     end
-    set_targetdir("nonebot_plugin_htmlkit")
-    set_filename("core.abi3.so")
