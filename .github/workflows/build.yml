@@ -101,8 +101,6 @@ jobs:
   
   build-macos:
     runs-on: macos-latest
-    env:
-      MACOSX_DEPLOYMENT_TARGET: '12.0'
     steps:
       - name: Checkout code
         uses: actions/checkout@v5

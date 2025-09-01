@@ -54,10 +54,11 @@ package_end()
 add_requires("litehtml_local", "pango", "cairo")
 set_languages("c++17")
 add_requires("python", { system = true, version = "3.10.x", configs = { shared = true } })
-add_requireconfs("**.python", { override = true, version = "3.10.x", headeronly = true })
+add_requireconfs("**.python", { override = true, version = "3.10.x", headeronly = true, shared = true })
 
 function require_htmlkit()
     add_packages("litehtml_local", "cairo", "pango", "python")
+    add_packages("python", { links = {} })
     add_files("core/*.cpp")
     add_defines("UNICODE", "PY_SSIZE_T_CLEAN", "Py_LIMITED_API=0x030a0000")  -- Python 3.10
     add_links("pangocairo-1.0")
