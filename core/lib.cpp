@@ -149,13 +149,13 @@ extern "C" {
 
     static PyMethodDef methods[] = {
         {
-            /* .ml_name = */ "render",
+            /* .ml_name = */ "_render_internal",
             /*.ml_meth = */render,
             /*.ml_flags = */METH_VARARGS,
             /*.ml_doc = */"Core function for rendering HTML page."
         },
         {
-            /* .ml_name = */ "setup_fontconfig",
+            /* .ml_name = */ "_init_fontconfig_internal",
             /*.ml_meth = */setup_fontconfig,
             /*.ml_flags = */METH_VARARGS,
             /*.ml_doc = */"Setup fontconfig if not already initialized."
