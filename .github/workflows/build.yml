@@ -36,10 +36,6 @@ jobs:
     container:
       image: almalinux:8
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
-        with:
-          submodules: recursive
       - name: Install prerequisites
         run: |
           dnf -y install dnf-plugins-core epel-release
@@ -52,6 +48,11 @@ jobs:
                          gcc-toolset-14-aarch64-linux-gnu-gcc \
                          gcc-toolset-14-aarch64-linux-gnu-gcc-c++
           echo "source /opt/rh/gcc-toolset-14/enable" >> $GITHUB_ENV
+
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          submodules: recursive
 
       - name: Install UV
         uses: astral-sh/setup-uv@v6
