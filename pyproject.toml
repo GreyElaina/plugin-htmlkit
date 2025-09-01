@@ -17,6 +17,9 @@ dev = [
     "nonebot-adapter-console>=0.9.0",
     "nonebot-adapter-onebot>=2.4.6",
     "nonebot2[fastapi]>=2.4.3",
+    "nonebug>=0.4.3",
+    "pytest>=8.4.1",
+    "pytest-asyncio>=1.1.0",
     "setuptools>=80.9.0",
 ]
 
@@ -66,3 +69,7 @@ mark-parentheses = false
 
 [tool.ruff.lint.pyupgrade]
 keep-runtime-typing = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "session"

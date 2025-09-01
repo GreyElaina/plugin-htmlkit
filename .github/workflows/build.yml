@@ -44,6 +44,20 @@ jobs:
         with:
           name: wheels-linux
           path: wheelhouse/*.whl
+      - name: Run Test
+        run: |
+          cd ../
+          mkdir test-env
+          cd test-env
+          uv python pin 3.13
+          uv venv
+          source .venv/bin/activate
+          cp -r ../plugin-htmlkit/tests/ ./tests
+          cp ../plugin-htmlkit/test-pyproject.toml ./pyproject.toml
+          uv sync
+          uv add $(ls ../plugin-htmlkit/wheelhouse/*.whl | head -n1)
+          uv run pytest
+
 
   build-windows:
     runs-on: windows-latest
@@ -78,6 +92,18 @@ jobs:
         with:
           name: wheels-windows
           path: wheelhouse/*.whl
+      - name: Run Test
+        run: |
+          cd ../
+          mkdir test-env
+          cd test-env
+          uv python pin 3.13
+          uv venv
+          .venv/Scripts/activate
+          cp -r ../plugin-htmlkit/tests/ ./tests
+          cp ../plugin-htmlkit/test-pyproject.toml ./pyproject.toml
+          uv add $((Get-ChildItem ..\plugin-htmlkit\wheelhouse\*.whl | Select-Object -First 1).FullName)
+          uv run pytest
   
   build-macos:
     runs-on: macos-latest
@@ -111,3 +137,16 @@ jobs:
         with:
           name: wheels-macos
           path: wheelhouse/*.whl
+      - name: Run Test
+        run: |
+          cd ../
+          mkdir test-env
+          cd test-env
+          uv python pin 3.13
+          uv venv
+          source .venv/bin/activate
+          cp -r ../plugin-htmlkit/tests/ ./tests
+          cp ../plugin-htmlkit/test-pyproject.toml ./pyproject.toml
+          uv sync
+          uv add $(ls ../plugin-htmlkit/wheelhouse/*.whl | head -n1)
+          uv run pytest
