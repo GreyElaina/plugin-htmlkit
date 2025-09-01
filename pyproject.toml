@@ -66,14 +66,3 @@ mark-parentheses = false
 
 [tool.ruff.lint.pyupgrade]
 keep-runtime-typing = true
-
-[tool.cibuildwheel]
-build-frontend ="build[uv]"
-build = "cp310-*"
-
-[tool.cibuildwheel.linux]
-archs = ["x86_64"]
-[tool.cibuildwheel.macos]
-archs = ["universal2"]
-[tool.cibuildwheel.windows]
-archs = ["AMD64"]

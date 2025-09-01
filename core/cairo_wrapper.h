@@ -18,9 +18,9 @@ License along with this library; if not, see <https://www.gnu.org/licenses/>.
 #ifndef CAIRO_WRAPPER_H
 #define CAIRO_WRAPPER_H
 
-#include "cairo.h"
+#include <cairo/cairo.h>
 #include <litehtml.h>
-#include "pango/pango-font.h"
+#include <pango/pango-font.h>
 #include <vector>
 
 #include <Python.h>
