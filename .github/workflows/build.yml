@@ -46,7 +46,7 @@ jobs:
           uv python pin 3.13
           uv venv
           source .venv/bin/activate
-          cp ../plugin-htmlkit/tests/ ./tests -r
+          cp -r ../plugin-htmlkit/tests/ ./tests
           cp ../plugin-htmlkit/test-pyproject.toml ./pyproject.toml
           uv sync
           uv add $(ls ../plugin-htmlkit/wheelhouse/*.whl | head -n1)
@@ -94,9 +94,9 @@ jobs:
           uv python pin 3.13
           uv venv
           .venv/Scripts/activate
-          cp ../plugin-htmlkit/tests/ ./tests -r
+          cp -r ../plugin-htmlkit/tests/ ./tests
           cp ../plugin-htmlkit/test-pyproject.toml ./pyproject.toml
-          uv pip install $((Get-ChildItem ..\plugin-htmlkit\wheelhouse\*.whl | Select-Object -First 1).FullName)
+          uv add $((Get-ChildItem ..\plugin-htmlkit\wheelhouse\*.whl | Select-Object -First 1).FullName)
           uv run pytest
   
   build-macos:
