@@ -44,6 +44,7 @@ jobs:
         run: |
           dnf -y install dnf-plugins-core epel-release
           dnf -y install 'dnf-command(config-manager)'
+          dnf -y install git wget make cmake xz file which
 
       - name: Enable GCC 14 toolset
         run: |
