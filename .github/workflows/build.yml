@@ -61,7 +61,7 @@ jobs:
           uv venv
           source .venv/bin/activate
           uv pip install pip setuptools wheel ninja meson
-          xmake require pango -y
+          xmake require -y pango
           uv build -v
         env:
           XMAKE_ROOT: 'y'
