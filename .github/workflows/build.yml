@@ -93,7 +93,7 @@ jobs:
         run: |
           git config --global --add safe.directory '*'
           uv venv
-          .venv/bin/activate
+          .venv/Scripts/activate
           uv pip install pip setuptools wheel ninja meson
           uv build
           cp dist/*.whl wheelhouse/
