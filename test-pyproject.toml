@@ -1,5 +1,6 @@
 [project]
 name = "test-env"
+version = "0.1.0"
 requires-python = ">=3.10"
 dependencies = [
     "nonebot-adapter-onebot>=2.4.6",
