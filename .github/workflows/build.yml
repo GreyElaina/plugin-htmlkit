@@ -34,12 +34,24 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
     container:
-      image: quay.io/pypa/manylinux2_28_x86_64:latest
+      image: almalinux:8
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
         with:
           submodules: recursive
+      - name: Install prerequisites
+        run: |
+          dnf -y install dnf-plugins-core epel-release
+          dnf -y install 'dnf-command(config-manager)'
+
+      - name: Enable GCC 14 toolset
+        run: |
+          dnf -y install gcc-toolset-14 gcc-toolset-14-gcc-c++ \
+                         gcc-toolset-14-aarch64-linux-gnu-gcc \
+                         gcc-toolset-14-aarch64-linux-gnu-gcc-c++
+          echo "source /opt/rh/gcc-toolset-14/enable" >> $GITHUB_ENV
+
       - name: Install UV
         uses: astral-sh/setup-uv@v6
       - name: Pin Python Version
